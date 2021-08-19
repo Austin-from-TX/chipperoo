@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import {
-    SafeAreaView,
-    StyleSheet,
-    ScrollView,
-    View,
-    Text,
-    StatusBar,
-    FlatList,
-    TouchableOpacity,
-    TextInput, Image
-} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image, Button } from 'react-native';
 
-export default function Searchbar({ value, updateSearch }) {
+export default function Searchbar({ search }) {
 
-    const [query, setQuery] = useState('');
+    const [text, setText] = useState('');
+
+    useEffect(() => {
+        if(text === '') return
+        else search(text.toLowerCase())
+    },[text, search] )
     
     return (
         <View style={[styles.container]}>
@@ -25,18 +20,18 @@ export default function Searchbar({ value, updateSearch }) {
                 </View>
 
                 <TextInput
-                    value={query}
-                    placeholder="Try searching for 'fish' "
+                    value={text}
+                    placeholder="Search 'fish' or 'all' to view all "
                     style={styles.textInput}
-                    onChangeText={(text) => {
-                            setQuery(text)
-                            updateSearch(text)
+                    onChangeText={text => {
+                      setText(text)
                     }}
+
                 />
                 {
-                    query ?
+                    text ?
                         <TouchableOpacity
-                            onPress={() => setQuery('')}
+                            onPress={() => setText('')}
                             style={styles.vwClear}>
                             <Image
                                 style={styles.icClear}
@@ -57,7 +52,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     textInput: {
-        // backgroundColor: 'green',
+        backgroundColor: '#58EBFF',
         flex: 1,
     },
 
@@ -65,15 +60,15 @@ const styles = StyleSheet.create({
         flex: 0.2,
         justifyContent: 'center',
         alignItems: 'center',
-        // width: 40,
-        // backgroundColor: 'red'
+        width: 40,
+        backgroundColor: '#58EBFF'
     },
     icSearch: {
         height: 18, width: 18
     },
     searchContainer:
     {
-        backgroundColor: 'white',
+        backgroundColor: '#58EBFF',
         width: '90%',
         height: 40,
         flexDirection: 'row'
