@@ -1,9 +1,8 @@
-import { add } from 'lodash'
 import React, { useState, useEffect} from 'react'
 import { StyleSheet, View, Text, TextInput, Button, ScrollView, Alert } from 'react-native'
 import { RadioButton, Checkbox } from 'react-native-paper'
 
-export default function Order({ navigation, route }) {
+export default function Order({ route }) {
 
     const { name } = route.params
     const [checkedFish, setCheckedFish] = useState('')
@@ -13,6 +12,7 @@ export default function Order({ navigation, route }) {
     const [instructions, setInstructions] = useState('')
     const [errors, setErrors] = useState([]);
 
+    // form validation 
     useEffect(() => {
     const errors = [];
     if (!checkedFish.length) {
@@ -27,7 +27,7 @@ export default function Order({ navigation, route }) {
     setErrors(errors);
   }, [checkedFish, userName, address]);
 
-
+    // success/fail alert based on form validation 
     const handleSubmit = (errors) => {
         if (errors.length) {
             Alert.alert('OOPS!', "Please fill our all required fields (with *'s)", [

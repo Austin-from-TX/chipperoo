@@ -1,19 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image, Button, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, TouchableOpacity, TextInput, Image } from 'react-native';
 import ChipperList from './ChipperList';
 
-export default function Searchbar({ search, navigation }) {
+export default function Searchbar({ navigation }) {
 
     const [text, setText] = useState('');
-
-    const searchHandler = (text) => {
-        console.log(text)
-        if (text === '') return
-        search(text.toLowerCase())
-    }
-
-    
-
     
     return (
             <View style={[styles.container]}>
@@ -44,9 +35,7 @@ export default function Searchbar({ search, navigation }) {
 
                 </View>
                 <View >
-                    {/* <Button title='Search' onPress={searchHandler} color='#58EBFF' /> */}
                     <ChipperList text={text} navigation={navigation} />
-                
                 </View>
             </View >
     )
@@ -82,7 +71,6 @@ const styles = StyleSheet.create({
 
     },
     container: {
-        height: 80,
         alignItems: 'center',
         height: '95%', width: '100%' 
     },

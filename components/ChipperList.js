@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, FlatList, Button, ScrollView } from 'react-native';
-
-
-// You can import from local files
+import { View, StyleSheet,  Button } from 'react-native';
 import ChipperCard from './ChipperCard';
 
-// or any pure javascript modules available in npm
 
 export default function ChipperList( { text, navigation }) {
 
