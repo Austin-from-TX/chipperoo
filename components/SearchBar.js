@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     textInput: {
-        backgroundColor: '#58EBFF',
+        backgroundColor: '#87F5FB',
         flex: 1,
     },
 
@@ -68,14 +68,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 40,
-        backgroundColor: '#58EBFF'
+        backgroundColor: '#87F5FB'
     },
     icSearch: {
         height: 18, width: 18
     },
     searchContainer:
     {
-        backgroundColor: '#58EBFF',
+        backgroundColor: '#87F5FB',
         width: '90%',
         height: 40,
         flexDirection: 'row'

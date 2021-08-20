@@ -22,15 +22,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F0F6E0',
-  },
-  content: {
-    padding: 20,
-  },
-  list: {
-    marginTop: 20,
-  },
-});

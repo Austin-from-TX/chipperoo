@@ -9,7 +9,7 @@ export default function ChipperCard( { chipper, navigation }) {
   const name = chipper.name
 
   return (
-    <TouchableOpacity onPress={ () => navigation.navigate('Order', { name: { name }}) }>
+    <TouchableOpacity onPress={ () => navigation.navigate('Order', { name: name }) }>
       <Card style={ styles.container }>
         <Text style={ styles.paragraph }>
           { name }  
@@ -25,13 +25,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 5,
     margin: 3, 
-    backgroundColor: '#F0F6E0'
+    backgroundColor: '#EEF2E3'
   },
   paragraph: {
     margin: 10,
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#FFC53E'
+    color: 'black'
   },
 });

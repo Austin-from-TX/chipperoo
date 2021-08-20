@@ -12,9 +12,9 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    height: 100,
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#58EBFF',
+    height: 75,
+    paddingTop: 10 ,
+    backgroundColor: '#87F5FB',
   },
   title: {
     textAlign: 'center',

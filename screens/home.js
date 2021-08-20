@@ -23,7 +23,7 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0F6E0',
+    backgroundColor: '#ecf0f1',
   },
   content: {
     padding: 20,
