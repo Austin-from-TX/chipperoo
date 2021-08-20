@@ -1,16 +1,34 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, TouchableWithoutFeedback, ScrollView, Keyboard } from 'react-native'
+import Header from '../components/Header';
+import Searchbar from '../components/SearchBar';
 
-export default function Home() {
+export default function Home({ navigation }) {
     return (
-        <View style={styles.container}> 
-            <Text>Home Screen </Text>
-        </View>
+        <TouchableWithoutFeedback onPress={() => {
+        Keyboard.dismiss();
+      }}> 
+          <ScrollView style={styles.container}>
+          <Header />
+            <View style={styles.content}>
+              <View style={styles.list}>
+                <Searchbar navigation={navigation}  /> 
+              </View>
+            </View>
+          </ScrollView>
+      </TouchableWithoutFeedback>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 24
-    }
-})
+  container: {
+    flex: 1,
+    backgroundColor: '#F0F6E0',
+  },
+  content: {
+    padding: 20,
+  },
+  list: {
+    marginTop: 20,
+  },
+});

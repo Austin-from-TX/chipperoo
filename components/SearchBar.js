@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image, Button, ScrollView } from 'react-native';
 import ChipperList from './ChipperList';
 
-export default function Searchbar({ search, viewAll }) {
+export default function Searchbar({ search, navigation }) {
 
     const [text, setText] = useState('');
 
@@ -45,7 +45,7 @@ export default function Searchbar({ search, viewAll }) {
                 </View>
                 <View >
                     {/* <Button title='Search' onPress={searchHandler} color='#58EBFF' /> */}
-                    <ChipperList text={text} />
+                    <ChipperList text={text} navigation={navigation} />
                 
                 </View>
             </View >

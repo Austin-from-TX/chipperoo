@@ -7,7 +7,7 @@ import ChipperCard from './ChipperCard';
 
 // or any pure javascript modules available in npm
 
-export default function ChipperList( { text }) {
+export default function ChipperList( { text, navigation }) {
 
   const [view, setView] = useState(false)
   const [chippers, setChippers] = useState([])
@@ -68,17 +68,10 @@ export default function ChipperList( { text }) {
      
           { view ? 
             <View style={styles.container}>
-              {/* <FlatList 
-                data={chippers}
-                keyExtractor={ (item) => item.id }
-                renderItem={ ({ item }) => (
-                  <ChipperCard chipper={ item } />
-                )}
-              />  */}
               
                 {chippers.map(chipper => (
                   <View key={ chipper.id }>
-                    <ChipperCard chipper={ chipper } />
+                    <ChipperCard chipper={ chipper } navigation={navigation} />
                   </View>
                 ))}
 
