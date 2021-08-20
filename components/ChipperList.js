@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
-import Constants from 'expo-constants';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, FlatList, Button, ScrollView } from 'react-native';
+
 
 // You can import from local files
 import ChipperCard from './ChipperCard';
-import Searchbar from './Searchbar';
 
 // or any pure javascript modules available in npm
 
-import { createStackNavigator } from '@react-navigation/stack';
-
-export default function ChipperList() {
+export default function ChipperList( { text }) {
 
   const [view, setView] = useState(false)
-  const [chippers, setChippers] = useState([
+  const [chippers, setChippers] = useState([])
+  const [toggle, setToggle] = useState(true)
+  
+  
+    const restaurants = [
     { name: "Feelin' Chummy", id: '1'},
     { name: "Romeo and Julie's Net", id: '2'},
     { name: "Famous Original Ray's Fish n Chips", id: '3'},
@@ -23,57 +24,70 @@ export default function ChipperList() {
     { name: "Fresh Fish of Bel-Air", id: '7'},
     { name: "Hootie and the Fishmongers", id: '8'},
     { name: "Fishy Fingers", id: '9'},
-    { name: "The Saucy Tartar", id: '10'},
-  ])
+    { name: "The Saucy Tartar", id: '10'}
+    ]
+  
+    useEffect(() => {
+        if (text === '' ) {
+          setChippers([])
+          setView(false)
+        } else {
+          search(text.toLowerCase())
+          setView(true) 
+        }
+    },[text, search])
 
-  const search = (word) => {
-    if(word.toLowerCase() !== 'all'){
-      setChippers((prevChippers) => {
-       return prevChippers.filter(chipper => chipper.name.toLowerCase().includes(word))
-      })
-      setView(true)
+  const search = (text) => {
+      const searchResult = restaurants.filter(restaurant => 
+        restaurant.name.toLowerCase().includes(text.toLowerCase()))
+          setChippers(searchResult)
+      
     } 
-    else if(word === 'all') setView(true) 
-  }
 
-  // const clearSearch = () => {
-  //   setChippers([
-  //   { name: "Feelin' Chummy", id: '1'},
-  //   { name: "Romeo and Julie's Net", id: '2'},
-  //   { name: "Famous Original Ray's Fish n Chips", id: '3'},
-  //   { name: "Fill Yer Gills", id: '4'},
-  //   { name: "Hook'd", id: '5'},
-  //   { name: "Chomping at the Chip", id: '6'},
-  //   { name: "Fresh Fish of Bel-Air", id: '7'},
-  //   { name: "Hootie and the Fishmongers", id: '8'},
-  //   { name: "Fishy Fingers", id: '9'},
-  //   { name: "The Saucy Tartar", id: '10'},
-  // ])
-  //   setView(false)
-  // }
+    const viewAll = () => {
+      setChippers(restaurants)
+      setView(true)
+      setToggle(false)
+    }
 
- 
+    const clear = () => {
+      setChippers([])
+      setView(false)
+      setToggle(true)
+    }
 
   return (
-      <>
-        <View> 
-          <Searchbar search={search} /> 
-        </View>
+      <View>
         
-        { view ? 
-          <View style={styles.container}>
-          
-            <FlatList 
-              data={chippers}
-              keyExtractor={ (item) => item.id }
-              renderItem={ ({ item }) => (
-                <ChipperCard chipper={ item } />
-              )}
-            /> 
-          </View>
-          : <></>
-        }  
-      </>
+        <View style={styles.button}> 
+          { 
+            toggle ?
+              <Button title='View All' onPress={viewAll} color='#56DAB7' /> : 
+              <Button title='Clear Results' onPress={clear} color='#FE7955' />  }
+        </View>
+     
+          { view ? 
+            <View style={styles.container}>
+              {/* <FlatList 
+                data={chippers}
+                keyExtractor={ (item) => item.id }
+                renderItem={ ({ item }) => (
+                  <ChipperCard chipper={ item } />
+                )}
+              />  */}
+              
+                {chippers.map(chipper => (
+                  <View key={ chipper.id }>
+                    <ChipperCard chipper={ chipper } />
+                  </View>
+                ))}
+
+            </View>
+              :
+              <></>
+          }
+  
+      </View>
   );
 }
 
@@ -82,6 +96,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#56DAB7',
     padding: 20,
-    borderRadius: 10,
+    borderRadius: 10
+  }, 
+  button: {
+    margin: 5, 
+    width: '100%' 
   }
 });

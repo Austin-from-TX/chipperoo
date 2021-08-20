@@ -12,7 +12,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    height: 120,
+    height: 100,
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#58EBFF',
   },

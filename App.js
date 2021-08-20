@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, View, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
 import Header from './components/Header';
-import ChipperList from './components/ChipperList';
-import Searchbar from './components/Searchbar';
+import Searchbar from './components/SearchBar';
+
 
 export default function App() {
   
   return (
+    <>
     <TouchableWithoutFeedback onPress={() => {
       Keyboard.dismiss();
-    }}>
-      <View style={styles.container}>
-        <Header />
+    }}> 
+        <ScrollView style={styles.container}>
+         <Header />
           <View style={styles.content}>
             <View style={styles.list}>
               {/* add list component*/ }
-              <ChipperList />
+              <Searchbar  /> 
             </View>
           </View>
-      </View>
+        </ScrollView>
     </TouchableWithoutFeedback>
+    </>
   );
 }
 
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F6E0',
   },
   content: {
-    padding: 40,
+    padding: 20,
   },
   list: {
     marginTop: 20,

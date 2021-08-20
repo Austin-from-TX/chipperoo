@@ -1,47 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image, Button } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image, Button, ScrollView } from 'react-native';
+import ChipperList from './ChipperList';
 
-export default function Searchbar({ search }) {
+export default function Searchbar({ search, viewAll }) {
 
     const [text, setText] = useState('');
 
-    useEffect(() => {
-        if(text === '') return
-        else search(text.toLowerCase())
-    },[text, search] )
+    const searchHandler = (text) => {
+        console.log(text)
+        if (text === '') return
+        search(text.toLowerCase())
+    }
+
+    
+
     
     return (
-        <View style={[styles.container]}>
-            <View style={styles.searchContainer}>
-                <View style={styles.vwSearch}>
-                    <Image
-                        style={styles.icSearch}
-                        source={require('../assets/ic_search.png')} />
+            <View style={[styles.container]}>
+                <View style={styles.searchContainer}>
+                    <View style={styles.vwSearch}>
+                        <Image
+                            style={styles.icSearch}
+                            source={require('../assets/ic_search.png')} />
+                    </View>
+
+                    <TextInput
+                        value={text}
+                        placeholder="Search 'fish' or press View All  "
+                        style={styles.textInput}
+                        onChangeText={text => setText(text)}
+                    />
+                    {
+                        text ?
+                            <TouchableOpacity
+                                onPress={() => setText('')}
+                                style={styles.vwClear}>
+                                <Image
+                                    style={styles.icClear}
+                                    source={require('../assets/ic_clear.png')} />
+                            </TouchableOpacity>
+                            : <View style={styles.vwClear} />
+                    }
+
                 </View>
-
-                <TextInput
-                    value={text}
-                    placeholder="Search 'fish' or 'all' to view all "
-                    style={styles.textInput}
-                    onChangeText={text => {
-                      setText(text)
-                    }}
-
-                />
-                {
-                    text ?
-                        <TouchableOpacity
-                            onPress={() => setText('')}
-                            style={styles.vwClear}>
-                            <Image
-                                style={styles.icClear}
-                                source={require('../assets/ic_clear.png')} />
-                        </TouchableOpacity>
-                        : <View style={styles.vwClear} />
-                }
-
-            </View>
-        </View >
+                <View >
+                    {/* <Button title='Search' onPress={searchHandler} color='#58EBFF' /> */}
+                    <ChipperList text={text} />
+                
+                </View>
+            </View >
     )
 }
 const styles = StyleSheet.create({
@@ -77,6 +84,6 @@ const styles = StyleSheet.create({
     container: {
         height: 80,
         alignItems: 'center',
-        // height: '100%', width: '100%' 
+        height: '95%', width: '100%' 
     },
 });
